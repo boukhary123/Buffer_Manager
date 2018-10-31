@@ -4,9 +4,41 @@ package bufmgr;
 
 import java.io.*;
 import java.util.*;
+
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import diskmgr.*;
 import global.*;
+import java.lang.*;
  
+class history{
+ 
+  private Map<Integer, Long[]> Hist;
+  private Map<Integer, Long> Last;
+  public static final int Correlated_Reference_Period=100000;
+
+  public history(){
+      Map<Integer, Long[]> Hist = new HashMap<Integer, Long[]>();
+      Map<Integer, Long[]> Last = new HashMap<Integer, Long>();
+  } 
+  public int get_k_access(int p, int k){
+    return Hist.get(p)[k];
+  }
+
+  public int get_last_access(int p){
+    return Last.get(p);
+  }
+  public void set_k_access(int p,int k,Long val){
+    Long tmp[];
+    tmp=Hist.get(p);
+    tmp[k]=val;
+    Hist.put(p,tmp);
+  }
+  public void update_last_access(int p){
+    Last.put(p,System.currentTimeMillis());
+  }
+}
+
 
 /** A frame description class. It describes each page in the buffer
  * pool, the page number in the file, whether it is dirty or not,
@@ -330,7 +362,7 @@ public class BufMgr implements GlobalConst{
   
   /** The replacer object, which is only used in this class. */
   private Replacer replacer;
-  
+  private history HIST;
   
   /** Factor out the common code for the two versions of Flush 
    *
@@ -439,7 +471,25 @@ public class BufMgr implements GlobalConst{
 	  {
 	    replacer = new LRU(this);
 	    System.out.println("Replacer: MRU\n");
-	  }
+    }
+
+    else if(replacerArg.compareTo("FIFO")==0)
+	  {
+	    replacer = new FIFO(this);
+	    System.out.println("Replacer: FIFO\n");
+    }
+    else if(replacerArg.compareTo("LIFO")==0)
+	  {
+	    replacer = new LIFO(this);
+	    System.out.println("Replacer: LIFO\n");
+    } 
+  	else if(replacerArg.compareTo("LRUK")==0)
+	  {
+	    replacer = new LRUK(this);
+      System.out.println("Replacer: LRUK\n");
+      HIST= new history();
+    }
+      
 	else
 	  {
 	    replacer = new Clock(this);
@@ -521,7 +571,8 @@ public class BufMgr implements GlobalConst{
 	frmeTable[frameNo].pageNo.pid = INVALID_PAGE; // frame is empty
 	frmeTable[frameNo].dirty = false;             // not dirty
 	
-	bst2 = hashTable.insert(pin_pgid,frameNo);
+  bst2 = hashTable.insert(pin_pgid,frameNo);
+  
 	
 	(frmeTable[frameNo].pageNo).pid = pin_pgid.pid;
 	frmeTable[frameNo].dirty = false;

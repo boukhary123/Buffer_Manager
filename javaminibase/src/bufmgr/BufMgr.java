@@ -5,7 +5,7 @@ package bufmgr;
 import java.io.*;
 import java.util.*;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+// import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import diskmgr.*;
 import global.*;
@@ -362,7 +362,7 @@ public class BufMgr implements GlobalConst{
 
   /** The replacer object, which is only used in this class. */
   private Replacer replacer;
-  private history HIST;
+
 
   /** Factor out the common code for the two versions of Flush
    *
@@ -439,7 +439,7 @@ public class BufMgr implements GlobalConst{
    * @param numbufs number of buffers in the buffer pool.
    * @param replacerArg name of the buffer replacement policy.
    */
-  public BufMgr( int numbufs, String replacerArg )
+  public BufMgr( int numbufs, String replacerArg)
 
     {
 
@@ -485,7 +485,7 @@ public class BufMgr implements GlobalConst{
     }
   	else if(replacerArg.compareTo("LRUK")==0)
 	  {
-	    replacer = new LRUK(this);
+	    replacer = new LRUK(this,5);
       System.out.println("Replacer: LRUK\n");
       // HIST= new history();
     }
@@ -551,7 +551,7 @@ public class BufMgr implements GlobalConst{
       if (replacer.name() == "LRUK"){
         // in LRUK replacement algorithm wee need to get
         // the pageid pf the page that is referenced
-        replacer.pageid = pin_pgid.pid;
+        ((LRUK)replacer).pageid = pin_pgid.pid;
       }
 
 
@@ -626,12 +626,12 @@ public class BufMgr implements GlobalConst{
 
       } else {    // the page is in the buffer pool ( frameNo > 0 )
 	if (replacer.name()=="LRUK"){
-    replacer.already_in_buffer=1;
+    ((LRUK)replacer).already_in_buffer=1;
   }
 	page.setpage(bufPool[frameNo]);
 	replacer.pin(frameNo);
   if (replacer.name()=="LRUK"){
-    replacer.already_in_buffer=0;
+    ((LRUK)replacer).already_in_buffer=0;
   }
 
       }

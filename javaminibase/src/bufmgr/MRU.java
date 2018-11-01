@@ -13,7 +13,7 @@ class MRU extends Replacer {
 
 /* private fields and methods */
 
-  /** 
+  /**
    * private field
    * An array to hold number of frames in the buffer pool
    */
@@ -21,7 +21,7 @@ class MRU extends Replacer {
 
 
 /**
- * 
+ *
  * Calling super class the same method
  * Initializing the frames[] with number of buffer allocated
  * by buffer manager
@@ -44,8 +44,8 @@ class MRU extends Replacer {
 
     frames[0] = -numBuffers;
 }
- 
-/** 
+
+/**
  * Class constructor
  * Initializing frames[] pointer = null.
  */
@@ -54,10 +54,10 @@ public  MRU(BufMgr mgrArg)
 {
    super(mgrArg);
    frames = null;
-   
+
 }
- 
- 
+
+
 /**
  * Adding the frame with given frame number to buffer pool
  * putting it in front of the list
@@ -82,11 +82,11 @@ public  MRU(BufMgr mgrArg)
     int frame = frames[index];
     while ( index-- >0)
       frames[index+1] = frames[index];
-        
+
 	frames[0] = frame;
- }  
- 
-/** 
+ }
+
+/**
  * pin the page with the given frame number
  * update the buffer pool
  *
@@ -98,23 +98,23 @@ public void pin(int frameNo) throws InvalidFrameNumberException
 {
     super.pin(frameNo);
 
-    update(frameNo);
+    // update(frameNo);
 }
 
-  /** 
+  /**
    * Finding a free frame in the buffer pool
    * or choosing a page to replace using MRU policy
    * Update the buffer pool
    * @return    return the frame number
    *            return -1 if No victims found
    */
- 
-    
+
+
 public int pick_victim()
 {
    int numBuffers = mgr.getNumBuffers();
    int i, frame;
-   
+
     for ( i = 0; i < numBuffers; ++i )
         if (frames[i] < 0) {
             if ( i == 0 )
@@ -127,7 +127,7 @@ public int pick_victim()
             update(frame);
             return frame;
         }
-  
+
     for ( i = 0; i < numBuffers; ++i ) {
          frame = frames[i];
         if ( state_bit[frame].state != Pinned ) {
@@ -137,11 +137,11 @@ public int pick_victim()
             return frame;
         }
        }
-      
+
        return -1;   // No victims found!!
 }
-  
-/** 
+
+/**
  * get the page replacement policy name
  *
  * @return    return the name of replacement policy used
@@ -149,7 +149,7 @@ public int pick_victim()
 
    public String name() { return "MRU"; }
 
-/** 
+/**
  * print out the information of frame usage
  */
 
@@ -158,14 +158,14 @@ public int pick_victim()
     super.info();
 
     System.out.print( "MRU REPLACEMENT");
-    
+
     for (int i = 0; i < mgr.getNumBuffers(); i++) {
         if (i % 5 == 0)
 	System.out.println();
 	System.out.print( "\t" + frames[i]);
-        
+
     }
     System.out.println();
  }
-  
+
 }

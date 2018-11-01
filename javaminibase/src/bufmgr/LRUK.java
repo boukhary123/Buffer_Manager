@@ -5,25 +5,28 @@ package bufmgr;
 import diskmgr.*;
 import global.*;
 import java.lang.*;
+import java.util.*;
 
 
 
 class history{
 
-  private Map<Integer, Long[]> Hist;
-  private Map<Integer, Long> Last;
-  public static final int Correlated_Reference_Period=100000;
+  private HashMap<Integer, Long[]> Hist;
+  private HashMap<Integer, Long> Last;
+  public int Correlated_Reference_Period=0;
   private int length;
 
-  public history(){
-      Map<Integer, Long[]> Hist = new HashMap<Integer, Long[]>();
-      Map<Integer, Long[]> Last = new HashMap<Integer, Long>();
+  public history(int k){
+
+      Hist = new HashMap<Integer, Long[]>();
+      Last = new HashMap<Integer, Long>();
+      length = k;
   }
-  public int get_k_access(int p, int k){
+  public Long get_k_access(int p, int k){
     return Hist.get(p)[k];
   }
 
-  public int get_last_access(int p){
+  public Long get_last_access(int p){
     return Last.get(p);
   }
   public void set_k_access(int p,int k,Long val){
@@ -37,13 +40,17 @@ class history{
   }
 
   public void update_last_access_hist(int p){
-    Hist.put(p,System.currentTimeMillis());
+    Long tmp[];
+    tmp=Hist.get(p);
+    tmp[0]=System.currentTimeMillis();
+    Hist.put(p,tmp);
   }
-  public void is_page_present(int p){
+  public boolean is_page_present(int p){
     // check if a paricular page is present in history
     return Hist.containsKey(p);
   }
   public void updating_hist(int p){
+
     Long tmp[];
     tmp=Hist.get(p);
     for(int i=1;i<length;i++){
@@ -60,8 +67,8 @@ class history{
     Hist.put(p,tmp);
   }
   public void allocate_block(int p){
-    Long tmp[];
-    tmp = new Long[length];
+    Long tmp[] = new Long[length];
+    Arrays.fill(tmp,0L);
     Hist.put(p,tmp);
   }
 }
@@ -84,12 +91,11 @@ class LRUK extends  Replacer {
   private int  nframes;
   private int lastRef;
   // varibale that stores hist and last data structures
-  private history hist;
   // variable used to track page id that is calling pin or
   // pick_victim
   public int pageid;
-
-  public int already_in_buffer=0;
+  public int already_in_buffer;
+  private history HIST;
 
 
   /**
@@ -98,14 +104,7 @@ class LRUK extends  Replacer {
    */
   private void update(int frameNo)
   {
-    //  int index;
-    //  for ( index=0; index < nframes; ++index )
-    //     if ( frames[index] == frameNo )
-    //         break;
-    //
-    // while ( ++index < nframes )
-    //     frames[index-1] = frames[index];
-    //     frames[nframes-1] = frameNo;
+
     if (already_in_buffer==0){
       // page not in buffer
     if (HIST.is_page_present(pageid)){
@@ -115,8 +114,8 @@ class LRUK extends  Replacer {
     else{
       HIST.allocate_block(pageid);
     }
-    HIST.update_last_access(p);
-    HIST.update_last_access_hist(p);
+    HIST.update_last_access(pageid);
+    HIST.update_last_access_hist(pageid);
   }
 
   else{
@@ -124,7 +123,7 @@ class LRUK extends  Replacer {
     // update history information of p
     Long t = System.currentTimeMillis();
     int p = frames[frameNo];
-    Long correl_period_of_refd_page = 0;
+    Long correl_period_of_refd_page = 0L;
     if((t-HIST.get_last_access(p)> HIST.Correlated_Reference_Period)){
       // new uncorrelated reference
       correl_period_of_refd_page = HIST.get_last_access(p)-HIST.get_k_access(p,0);
@@ -156,10 +155,6 @@ class LRUK extends  Replacer {
         super.setBufferManager(mgr);
 	      frames = new int [ mgr.getNumBuffers() ];
 	      nframes = 0;
-        pageid=-1;
-        already_in_buffer=-1;
-        lastRef=k;
-        hist= new history();
 
      }
 
@@ -173,6 +168,10 @@ class LRUK extends  Replacer {
     {
       super(mgrArg);
       frames = null;
+      pageid=-1;
+      already_in_buffer=0;
+      lastRef=k;
+      HIST = new history(lastRef);
 
     }
 
@@ -201,12 +200,10 @@ class LRUK extends  Replacer {
  public int pick_victim()
  {
    int numBuffers = mgr.getNumBuffers();
-   int frame;
+   int frame=-1;
 
     if ( nframes < numBuffers ) {
       // buffer is not full
-
-
         frame = nframes++;
         frames[frame] = pageid;
         state_bit[frame].state = Pinned;
@@ -218,10 +215,10 @@ class LRUK extends  Replacer {
     Long min = System.currentTimeMillis();
     Long t = System.currentTimeMillis();
     int victim;
+    int q;
     for ( int i = 0; i < numBuffers; ++i ) {
          q = frames[i];
-        if ( state_bit[frame].state != Pinned ) {
-
+        if ( state_bit[i].state != Pinned ) {
           if((t-HIST.get_last_access(q))>
           HIST.Correlated_Reference_Period & HIST.get_k_access(q,0) < min){
           victim = q;
@@ -229,11 +226,18 @@ class LRUK extends  Replacer {
           min =  HIST.get_k_access(q,0);
 
           }
-            state_bit[frame].state = Pinned;
-            (mgr.frameTable())[frame].pin();
-            update(0);
-            return frame;
+
+            // state_bit[frame].state = Pinned;
+            // (mgr.frameTable())[frame].pin();
+            // update(0);
+            // return frame;
         }
+        if (frame>=0){
+        state_bit[frame].state = Pinned;
+        (mgr.frameTable())[frame].pin();
+        update(0);
+        return frame;
+      }
     }
 
     return -1;

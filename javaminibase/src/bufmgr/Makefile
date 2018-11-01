@@ -1,4 +1,4 @@
-JDKPATH = /s/java
+JDKPATH = /usr/lib/jvm/java-11-openjdk-amd64
 LIBPATH = /p/course/cs784-raghu/minibase_share/javaminibase/construction
 CLASSPATH = $(JDKPATH)/lib/classes.zip:.:..:$(LIBPATH)
 BINPATH = $(JDKPATH)/bin
@@ -16,4 +16,4 @@ together:*.java
 	$(JAVAC) *.java
 
 clean:
-	\rm -f *.class *~ \#* core 
+	\rm -f *.class *~ \#* core

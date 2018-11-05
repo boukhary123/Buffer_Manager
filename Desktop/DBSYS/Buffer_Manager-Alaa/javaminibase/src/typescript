@@ -1,0 +1,140 @@
+Script started on 2018-11-01 06:38:19-0700
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[K [00m$ git push origin Alaa[C[C[C[C[C[Ccommit -m "Completed Code without trying it"[C[C[C[C[C[C[C[Cnfig --global user.email "alaaboukhary@gmail.com"[C[C[C[C[C[C[C[C[7Pmmit -m "Completed Code without trying it"[C[C[C[C[C[C[C[C[5Pnfig --global user.name "boukhary123"[C[C[C[C[C[C[C[Cmmit -m "Completed Code without trying it"[C[C[C[C[C[C[C[C[5Pnfig --global user.name "boukhary123"[C[C[C[C[C[C[C[Cmmit -m "Completed Code without trying it"[C[C[C[C[C[C[C[Cnfig --global user.email "alaaboukhary@gmail.com"[C[C[C[C[C[C[C[C[7Pmmit -m "Completed Code without trying it"[C[C[C[C[C[C[28Ppush origin Alaa[C[C[Kmake test
+cd tests; make JoinTest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java JoinTest.java
+Note: JoinTest.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ make test
+cd tests; make jointest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java JoinTest.java
+Note: JoinTest.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath ./.. tests.JoinTest
+Exception in thread "main" java.lang.NoClassDefFoundError: bufmgr/LRUK
+	at global.SystemDefs.init(SystemDefs.java:56)
+	at global.SystemDefs.<init>(SystemDefs.java:38)
+	at tests.JoinsDriver.<init>(JoinTest.java:156)
+	at tests.JoinTest.main(JoinTest.java:1695)
+Caused by: java.lang.ClassNotFoundException: bufmgr.LRUK
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:190)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:499)
+	... 4 more
+Makefile:55: recipe for target 'jointest' failed
+make[1]: *** [jointest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ make test
+cd tests; make bmtest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+BMTest.java:780: error: class BMTest2 is public, should be declared in a file named BMTest2.java
+public class BMTest2 {
+       ^
+1 error
+Makefile:12: recipe for target 'BMTest' failed
+make[1]: *** [BMTest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ make test
+cd tests; make bmtest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath ./.. tests.BMTest
+
+RunniSystemDefs.java:38)
+	at tests.JoinsDriver.<init>(JoinTest.java:156)
+	at tests.JoinTest.main(JoinTest.java:1695)
+Caused by: java.lang.ClassNotFoundException: bufmgr.LRUK
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:190)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:499)
+	... 4 more
+Makefile:55: recipe for target 'jointest' failed
+make[1]: *** [jointest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ make test
+cd tests; make bmtest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+BMTest.java:780: error: class BMTest2 is public, should be declared in a file named BMTest2.java
+public class BMTest2 {
+       ^
+1 error
+Makefile:12: recipe for target 'BMTest' failed
+make[1]: *** [BMTest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ make test
+cd tests; make bmtest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath ./.. tests.BMTest
+
+Running Buffer Management tests....
+Exception in thread "main" java.lang.NoClassDefFoundError: bufmgr/LRUK
+	at global.SystemDefs.init(SystemDefs.java:56)
+	at global.SystemDefs.<init>(SystemDefs.java:38)
+	at tests.BMDriver.runTests(BMTest.java:41)
+	at tests.BMTest.main(BMTest.java:787)
+Caused by: java.lang.ClassNotFoundException: bufmgr.LRUK
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:190)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:499)
+	... 4 more
+Makefile:15: recipe for target 'bmtest' failed
+make[1]: *** [bmtest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/BBuffer_Manager/javaminibase/src[00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Bufffer_Manager/javaminibase/src[00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/BBuffer_Manager/javaminibase/src[00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[00m$ [K]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffeanager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath ./.. tests.BMTest
+
+Running Buffer Management tests....
+Exception in thread "main" java.lang.NoClassDefFoundError: bufmgr/LRUK
+	at global.SystemDefs.init(SystemDefs.java:56)
+	at global.SystemDefs.<init>(SystemDefs.java:38)
+	at tests.BMDriver.runTests(BMTest.java:41)
+	at tests.BMTest.main(BMTest.java:787)
+Caused by: java.lang.ClassNotFoundException: bufmgr.LRUK
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:190)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:499)
+	... 4 more
+Makefile:15: recipe for target 'bmtest' failed
+make[1]: *** [bmtest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/BBuffer_Manager/javaminibase/src[00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Bufffer_Manager/javaminibase/src[00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/BBuffer_Manager/javaminibase/src[00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ [K[A]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[00m$ [K]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ make test
+cd tests; make bmtest
+make[1]: Entering directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath ./.. tests.BMTest
+
+Running Buffer Management tests....
+Exception in thread "main" java.lang.NoClassDefFoundError: bufmgr/LRUK
+	at global.SystemDefs.init(SystemDefs.java:56)
+	at global.SystemDefs.<init>(SystemDefs.java:38)
+	at tests.BMDriver.runTests(BMTest.java:41)
+	at tests.BMTest.main(BMTest.java:787)
+Caused by: java.lang.ClassNotFoundException: bufmgr.LRUK
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:190)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:499)
+	... 4 more
+Makefile:15: recipe for target 'bmtest' failed
+make[1]: *** [bmtest] Error 1
+make[1]: Leaving directory '/home/boukhary/Desktop/Minibase_new/Buffer_Manager/javaminibase/src/tests'
+Makefile:12: recipe for target 'test' failed
+make: *** [test] Error 2
+]0;boukhary@ubuntu: ~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src[01;32mboukhary@ubuntu[00m:[01;34m~/Desktop/Minibase_new/Buffer_Manager/javaminibase/src [00m$ exit

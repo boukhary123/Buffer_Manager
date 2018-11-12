@@ -94,6 +94,7 @@ class FIFO extends  Replacer {
    */
 
  public int pick_victim()
+ throws BufferPoolExceededException
  {
    int numBuffers = mgr.getNumBuffers();
    int frame;
@@ -115,8 +116,9 @@ class FIFO extends  Replacer {
             return frame;
         }
     }
-
-    return -1;
+    // No victims found!!
+    throw new BufferPoolExceededException (null, "BUFMGR: BUFFER_EXCEEDED.");
+    //return -1;
  }
 
   /**

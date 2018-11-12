@@ -111,6 +111,7 @@ public void pin(int frameNo) throws InvalidFrameNumberException
 
 
 public int pick_victim()
+throws BufferPoolExceededException
 {
    int numBuffers = mgr.getNumBuffers();
    int i, frame;
@@ -137,8 +138,9 @@ public int pick_victim()
             return frame;
         }
        }
-
-       return -1;   // No victims found!!
+       // No victims found!!
+       throw new BufferPoolExceededException (null, "BUFMGR: BUFFER_EXCEEDED.");
+       //return -1;
 }
 
 /**

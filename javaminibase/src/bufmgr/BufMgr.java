@@ -501,6 +501,10 @@ public class BufMgr implements GlobalConst{
 
     }
 
+  public Replacer getReplacer(){
+    return replacer;
+  }
+
 
   // Debug use only
   private void bmhashdisplay()

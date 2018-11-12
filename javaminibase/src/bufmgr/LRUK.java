@@ -75,7 +75,7 @@ class history{
 
 
 
-class LRUK extends  Replacer {
+public class LRUK extends  Replacer {
 
   /**
    * private field
@@ -95,7 +95,7 @@ class LRUK extends  Replacer {
   // pick_victim
   public int pageid;
   public int already_in_buffer;
-  private history HIST;
+  public history HIST;
 
 
   /**
@@ -198,6 +198,7 @@ class LRUK extends  Replacer {
    *		return -1 if failed
    */
  public int pick_victim()
+ throws BufferPoolExceededException
  {
    int numBuffers = mgr.getNumBuffers();
    int frame=-1;
@@ -205,22 +206,26 @@ class LRUK extends  Replacer {
     if ( nframes < numBuffers ) {
       // buffer is not full
         frame = nframes++;
+        // System.out.println(frame);
         frames[frame] = pageid;
         state_bit[frame].state = Pinned;
+        // System.out.println(state_bit[frame].state);
         (mgr.frameTable())[frame].pin();
         update(0);
         return frame;
     }
     // buffer is full
-    Long min = System.currentTimeMillis();
+    Long min;
     Long t = System.currentTimeMillis();
+    min=t;
     int victim;
     int q;
     for ( int i = 0; i < numBuffers; ++i ) {
          q = frames[i];
         if ( state_bit[i].state != Pinned ) {
           if((t-HIST.get_last_access(q))>
-          HIST.Correlated_Reference_Period & HIST.get_k_access(q,0) < min){
+          HIST.Correlated_Reference_Period && HIST.get_k_access(q,0) < min){
+          // sSystem.out.println("State is pinned");
           victim = q;
           frame = i;
           min =  HIST.get_k_access(q,0);
@@ -239,8 +244,9 @@ class LRUK extends  Replacer {
         return frame;
       }
     }
-
-    return -1;
+    // No victims found!!
+    throw new BufferPoolExceededException (null, "BUFMGR: BUFFER_EXCEEDED.");
+    // return -1;
  }
 
   /**
@@ -250,6 +256,13 @@ class LRUK extends  Replacer {
    */
     public String name() { return "LRUK"; }
 
+    public int[] getFrames(){
+      return frames;
+    }
+
+    public Long get_history_access(int p,int k){
+      return HIST.get_k_access(p,k);
+    }
   /**
    * print out the information of frame usage
    */

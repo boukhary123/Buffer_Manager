@@ -1,0 +1,122 @@
+Script started on 2018-11-13 14:54:17-0800
+]0;ouko@ubuntu: ~/Desktop/buffermanager/javaminibase/src/tests[01;32mouko@ubuntu[00m:[01;34m~/Desktop/buffermanager/javaminibase/src/tests[00m$ make bmtest
+/usr/lib/jvm/java-11-openjdk-amd64/bin/javac -classpath ./.. TestDriver.java BMTest.java
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java  -classpath ./.. tests.BMTest
+
+Running Buffer Management tests....
+Replacer: LRUK
+
+
+  Test 1 does simple test on buffer using theFIFOalgorithmmanager operations:
+Replacer: FIFO
+
+  - Allocate a bunch of new pages
+  - Write something on each one
+  - Read that something back from each one
+   (because we're buffering, this is where most of the writes happen)
+  - Free the pages again
+  Test 1 completed successfully.
+
+  Test 1 does simple test on buffer using theLIFOalgorithmmanager operations:
+Replacer: LIFO
+
+  - Allocate a bunch of new pages
+  - Write something on each one
+  - Read that something back from each one
+   (because we're buffering, this is where most of the writes happen)
+  - Free the pages again
+  Test 1 completed successfully.
+
+  Test 1 does simple test on buffer using theLRUKalgorithmmanager operations:
+Replacer: LRUK
+
+  - Allocate a bunch of new pages
+  - Write something on each one
+  - Read that something back from each one
+   (because we're buffering, this is where most of the writes happen)
+  - Free the pages again
+  Test 1 completed successfully.
+
+  Test 2 exercises some illegal buffer manager operations:FIFO
+Replacer: FIFO
+
+  - Try to pin more pages than there are frames
+*** Pinning too many pages
+  --> Failed as expected 
+
+  - Try to free a doubly-pinned page
+*** Freeing a pinned page
+  --> Failed as expected 
+
+  - Try to unpin a page not in the buffer pool
+*** Unpinning a page not in the buffer pool
+  --> Failed as expected 
+
+  Test 2 completed successfully.
+
+  Test 2 exercises some illegal buffer manager operations:LIFO
+Replacer: LIFO
+
+  - Try to pin more pages than there are frames
+*** Pinning too many pages
+  --> Failed as expected 
+
+  - Try to free a doubly-pinned page
+*** Freeing a pinned page
+  --> Failed as expected 
+
+  - Try to unpin a page not in the buffer pool
+*** Unpinning a page not in the buffer pool
+  --> Failed as expected 
+
+  Test 2 completed successfully.
+
+  Test 2 exercises some illegal buffer manager operations:LRUK
+Replacer: LRUK
+
+  - Try to pin more pages than there are frames
+*** Pinning too many pages
+  --> Failed as expected 
+
+  - Try to free a doubly-pinned page
+*** Freeing a pinned page
+  --> Failed as expected 
+
+  - Try to unpin a page not in the buffer pool
+*** Unpinning a page not in the buffer pool
+  --> Failed as expected 
+
+  Test 2 completed successfully.
+
+  Test 3 exercises some of the internals of the buffer managerFIFO
+Replacer: FIFO
+
+  - Allocate and dirty some new pages, one at a time, and leave some pinned
+  - Read the pages
+  Test 3 completed successfully.
+
+  Test 3 exercises some of the internals of the buffer managerLIFO
+Replacer: LIFO
+
+  - Allocate and dirty some new pages, one at a time, and leave some pinned
+  - Read the pages
+  Test 3 completed successfully.
+
+  Test 3 exercises some of the internals of the buffer managerLRUK
+Replacer: LRUK
+
+  - Allocate and dirty some new pages, one at a time, and leave some pinned
+  - Read the pages
+  Test 3 completed successfully.
+
+  Test 4 
+Replacer: LRUK
+
+- Read the pages
+  Test 4 completed successfully.
+
+...Buffer Management tests completely successfully.
+
+]0;ouko@ubuntu: ~/Desktop/buffermanager/javaminibase/src/tests[01;32mouko@ubuntu[00m:[01;34m~/Desktop/buffermanager/javaminibase/src/tests[00m$ [K]0;ouko@ubuntu: ~/Desktop/buffermanager/javaminibase/src/tests[01;32mouko@ubuntu[00m:[01;34m~/Desktop/buffermanager/javaminibase/src/tests[00m$ exit
+
+Script done on 2018-11-13 14:54:41-0800

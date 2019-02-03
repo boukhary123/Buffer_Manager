@@ -1,4 +1,4 @@
-# Database Management System Implementation
+# Database Management System Buffer Manager
 
 ## Introduction
 One of the crucial task in database management is reading and writing pages from memory. Selection of subset of pages present in the memory is regarded as the buffer-pool. Buffer pool is organized into frames, where each frame holds a page from the disk. The buffer-manager is implemented to manage the allocation (pinning) and deallocation (unpinning) of pages from disk to the main memory and vice versa. Buffer manager maintains a pin counter, which stores the number of times a page is requested (but not released), and a dirty flag, which marks whether or not a page is updated. One important task of the buffer manager is to deploy a page replacement policy, when the buffer is full. Replacement policy is responsible for selecting the page to be flushed from the buffer-pool. Techniques like Least Recently Used [LRU], Mostly Recently Used [MRU], and Clock identify pages from the buffer-pool to be written to disk.

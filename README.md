@@ -4,7 +4,7 @@
 One of the crucial task in database management is reading and writing pages from memory. Selection of subset of pages present in the memory is regarded as the buffer-pool. Buffer pool is organized into frames, where each frame holds a page from the disk. The buffer-manager is implemented to manage the allocation (pinning) and deallocation (unpinning) of pages from disk to the main memory and vice versa. Buffer manager maintains a pin counter, which stores the number of times a page is requested (but not released), and a dirty flag, which marks whether or not a page is updated. One important task of the buffer manager is to deploy a page replacement policy, when the buffer is full. Replacement policy is responsible for selecting the page to be flushed from the buffer-pool. Techniques like Least Recently Used [LRU], Mostly Recently Used [MRU], and Clock identify pages from the buffer-pool to be written to disk.
 
 ## Description
-In this project, we implemented three different page replacement policies for buffer manager in [Minibase] (http://research.cs.wisc.edu/coral/mini_doc/minibase.html), namely
+In this project, we implemented three different page replacement policies for buffer manager in [Minibase](http://research.cs.wisc.edu/coral/mini_doc/minibase.html), namely
 1. First-In, First-Out [FIFO] is one of the elementary techniques used to carry-out page replacement in the buffer. It is a low-overhead algorithm with little bookkeeping that uses a queue to maintain the order in which pages are accessed in memory. When a page is required to be replaced, the page in the front of the queue is selected to be flushed to disk.
 2. Last-In, First-out [LIFO] is a technique that works similar to FIFO but the page to be replaced is selected from the back of the queue.
 3. Least Recently Used - k Reference [LRU-K] is a technique that keeps track of the number of times each page is request in the last k-references to pages in buffer pool.
@@ -12,11 +12,11 @@ The first two replacement policies are not discriminating against different page
 
 The code pieces that were worked on or edited are:
 
-- bufmgr class in BufMgr.java
-- FIFO class in FIFO.java
-- LIFO class in LIFO.java
-- LRUK class in LRKU.java
-- history class in LRUK.java
+- bufmgr class in [BufMgr.java](https://github.com/boukhary123/Buffer_Manager/blob/master/javaminibase/src/bufmgr/BufMgr.java)
+- FIFO class in [FIFO.java](https://github.com/boukhary123/Buffer_Manager/blob/master/javaminibase/src/bufmgr/FIFO.java)
+- LIFO class in [LIFO.java](https://github.com/boukhary123/Buffer_Manager/blob/master/javaminibase/src/bufmgr/LIFO.java)
+- LRUK class in [LRUK.java](https://github.com/boukhary123/Buffer_Manager/blob/master/javaminibase/src/bufmgr/LRUK.java)
+- history class in [LRUK.java](https://github.com/boukhary123/Buffer_Manager/blob/master/javaminibase/src/bufmgr/LRUK.java)
 
 ## bufmgr class in BufMgr.java
 
@@ -65,4 +65,4 @@ page in it is unpinned.
 - Then the update function will be called to either generate a new Hist and Last blocks for the new page, or just update these two pieces of information in the case where the page was referenced in some point in history.
 
 ## References
-[1] O’Neil, E., O’Neil, P., & Weikum, G. – The LRU-K page replacement algorithm for database disk buffering. – In SIGMOD, 1993.
+[1] [O’Neil, E., O’Neil, P., & Weikum, G. – The LRU-K page replacement algorithm for database disk buffering. – In SIGMOD, 1993.](http://www.cs.cmu.edu/~christos/courses/721-resources/p297-o_neil.pdf)
